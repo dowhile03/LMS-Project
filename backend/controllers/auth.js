@@ -158,6 +158,81 @@ res.json({
  
 };  
 
+exports.Tsignup = (req , res) => {
+
+    const errors = validationResult(req)
+
+if(!errors.isEmpty()){
+    return res.status(400).json({
+        errors: errors.array()[0].msg
+    })
+}
+
+    const user = User(req.body)
+    user.save((err , user) => {
+        if(err){
+            return res.status(400).json({
+                err : "Not able to see user in DB"
+            })
+        }
+
+        res.json({
+            name : user.name,
+            email : user.email,
+            id : user._id
+        });
+    });
+};
+
+exports.Tsignin = (req , res) =>{
+    const errors = validationResult(req)
+
+const {email,name,password} = req.body;
+
+
+if(!errors.isEmpty()){
+    return res.status(422).json({
+        errors: errors.array()[0].msg
+    })
+}
+
+User.findOne({name}, (err , user) => {
+
+    if(err || !user){
+       return res.status(400).json({
+            errors: "User E-mail does not exists"
+        })
+    }
+
+    if(!user.authenticate(password)){
+  return res.status(401).json({
+    errors: "Password do not match"
+})
+    }
+//creating token
+    const token = jwt.sign({_id:user._id} , process.env.SECRET);
+
+    //putting token in cookie
+
+    res.cookie("token",token ,{expire : new Date() + 9999});
+
+    //send response to frontend
+
+    const {_id ,name,email,role} = user;
+    return res.json({token,user:{_id,name,email,role}});
+
+});
+
+};
+
+exports.Tsignout = (req , res) => {
+    res.clearCookie("token");
+res.json({
+    message:"User is Signed Out Successfully"
+    });
+ 
+};  
+
 
 //protected routes
 

@@ -3,6 +3,7 @@ var router = express.Router();
 const { check , validationResult } = require("express-validator");
 const {signout, signup , signin , isSignedIn} = require("../controllers/auth");
 const {Usignout,Usignup,Usignin} = require("../controllers/auth");
+const{Tsignin,Tsignup,Tsignout} = require("../controllers/auth")
 
 
 
@@ -40,6 +41,23 @@ router.post("/Usignin", [
 
 
 router.get("/Usignout", Usignout);
+
+router.post("/Tsignup", [
+    check("name" , "name should be at least three chars").isLength({min : 3}),
+    
+    check("password" , "Password Should be atleast 3 chars").isLength({min : 3})
+], Tsignup);
+
+
+
+router.post("/Tsignin", [
+    check("name" , "name should be at least three chars").isLength({min : 3}),
+    
+    check("password" , "Password Should be atleast 3 chars").isLength({min : 3})
+], Tsignin);
+
+
+router.get("/Usignout", Tsignout);
 
 
 

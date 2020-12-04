@@ -15,6 +15,13 @@ import UpdateProduct from "./admin/UpdateProduct";
 // import Cart from "./core/Cart";
 import USignin from "./user/USignin";
 import USignup from "./user/USignup";
+import CreateLogin from "./user/CreateLogin";
+
+import TSignin from "./user/TSignin";
+import TSignup from "./user/TSignup";
+
+
+
 
 
 const Routes = () => {
@@ -27,6 +34,11 @@ const Routes = () => {
 
         <Route path="/signin" exact component={Signin} />
         <Route path="/Usignin" exact component={USignin} />
+        <Route path="/createlogin" exact component={CreateLogin} />
+
+        <Route path="/Tsignin" exact component={TSignin} />
+        <Route path="/Tsignup" exact component={TSignup} />
+      
 
      {/*<Route path="/cart" exact component={Cart} /> */}   
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />

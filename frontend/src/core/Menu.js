@@ -6,7 +6,7 @@ const currentTab = (history, path) => {
   if (history.location.pathname === path) {
     return { color: "#2ecc72" };
   } else {
-    return { color: "#FFFFFF" };
+    return { color: "#FFFFFF" }; 
   }
 };
 
@@ -44,7 +44,7 @@ const Menu = ({ history }) => {
         )}
         {!isAuthenticated() && (
           <Fragment>
-            <li className="nav-item">
+           {/* <li className="nav-item">
               <Link
                 style={currentTab(history, "/signup")}
                 className="nav-link"
@@ -52,14 +52,39 @@ const Menu = ({ history }) => {
               >
                 Parent SignUp
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link
                 style={currentTab(history, "/signin")}
                 className="nav-link"
                 to="/signin"
               >
-              Parent SignIn
+              Parent Login
+              </Link>
+            </li>
+          </Fragment>
+        )}
+
+       
+
+        {!isAuthenticated() && (
+          <Fragment>
+           {/* <li className="nav-item">
+              <Link
+                style={currentTab(history, "/signup")}
+                className="nav-link"
+                to="/signup"
+              >
+                Parent SignUp
+              </Link>
+            </li> */}
+            <li className="nav-item">
+              <Link
+                style={currentTab(history, "Tsignin")}
+                className="nav-link"
+                to="Tsignin"
+              >
+              Teacher Login
               </Link>
             </li>
           </Fragment>
@@ -82,9 +107,24 @@ const Menu = ({ history }) => {
                 className="nav-link"
                 to="/Usignin"
               >
-                Student
+                Student Login
               </Link>
             </li> 
+          </Fragment>
+        )}
+
+        {!isAuthenticated() && (
+          <Fragment>
+           
+            <li className="nav-item ml-3">
+              <Link
+                style={currentTab(history, "/createlogin")}
+                className="nav-link text-dark bg-light"
+                to="/createlogin"
+              >
+              Create Login
+              </Link>
+            </li>
           </Fragment>
         )}
 

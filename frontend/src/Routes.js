@@ -20,6 +20,8 @@ import CreateLogin from "./user/CreateLogin";
 import TSignin from "./user/TSignin";
 import TSignup from "./user/TSignup";
 
+import TeacherDashboard from "./user/TeacherDashboard"
+
 
 
 
@@ -43,6 +45,7 @@ const Routes = () => {
      {/*<Route path="/cart" exact component={Cart} /> */}   
         <PrivateRoute path="/user/dashboard" exact component={UserDashBoard} />
         <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard} />
+        <AdminRoute path="/teacher/dashboard" exact component={TeacherDashboard}/>
        {/*<AdminRoute
           path="/admin/create/category"
           exact

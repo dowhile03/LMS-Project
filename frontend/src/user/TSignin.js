@@ -4,18 +4,16 @@ import { Redirect } from "react-router-dom";
 
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
-const USignin = () => {
+const TSignin = () => {
   const [values, setValues] = useState({
     email: "",
-    name:"",
     password: "",
-    role:2,
     error: "",
     loading: false,
     didRedirect: false
   });
 
-  const { email, name,password,role, error, loading, didRedirect } = values;
+  const { email, password, error, loading, didRedirect } = values;
   const { user } = isAuthenticated();
 
   const handleChange = name => event => {
@@ -25,7 +23,7 @@ const USignin = () => {
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
-    signin({ email,name, password,role })
+    signin({ email, password })
       .then(data => {
         if (data.error) {
           setValues({ ...values, error: data.error, loading: false });
@@ -43,11 +41,9 @@ const USignin = () => {
 
   const performRedirect = () => {
     if (didRedirect) {
-      if (user && user.role === 1) {
-        return <Redirect to="/admin/dashboard"/>;
-      } else {
-        return <Redirect to ="/user/dashboard"/>;
-      }
+      if (user && user.role === 2) {
+        return <Redirect to="/teacher/dashboard"/>;
+      } 
     }
     if (isAuthenticated()) {
       return <Redirect to="/" />;
@@ -85,12 +81,12 @@ const USignin = () => {
         <div className="col-md-6 offset-sm-3 text-left">
           <form>
             <div className="form-group">
-              <label className="text-light">Username</label>
+              <label className="text-light">Email</label>
               <input
-                onChange={handleChange("name")}
-                value={name}
+                onChange={handleChange("email")}
+                value={email}
                 className="form-control"
-                type="text"
+                type="email"
               />
             </div>
 
@@ -113,7 +109,7 @@ const USignin = () => {
   };
 
   return (
-    <Base title="Sign In page" description="A page for Teacher to sign in!">
+    <Base title="Teacher Sign In page" description="A page for Teacher to sign in!">
       {loadingMessage()}
       {errorMessage()}
       {signInForm()}
@@ -124,4 +120,4 @@ const USignin = () => {
   );
 };
 
-export default USignin;
+export default TSignin;

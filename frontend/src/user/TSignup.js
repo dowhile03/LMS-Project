@@ -3,7 +3,7 @@ import Base from "../core/Base";
 import { Link } from "react-router-dom";
 import { signup } from "../auth/helper";
 
-const USignup = () => {              
+const TSignup = () => {              
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -21,7 +21,7 @@ const USignup = () => {
   const onSubmit = event => {
     event.preventDefault();
     setValues({ ...values, errors: false });
-    signup({ name, email, password ,role})
+    signup({ name, email, role,password })
       .then(data => {
         if (data.errors) {
           setValues({ ...values, errors: data.errors, success: false });
@@ -30,7 +30,7 @@ const USignup = () => {
             ...values,
             name: "",
             email: "",
-            role:0,
+            role:2,
             password: "",
             errors: "",
             success: true
@@ -45,17 +45,17 @@ const USignup = () => {
       <div className="row">
         <div className="col-md-6 offset-sm-3 text-left">
           <form>
-            <div className="form-group">
-              <label className="text-light">userName</label>
+          {/* <div className="form-group">
+              <label className="text-light">Name</label>
               <input
                 className="form-control"
                 onChange={handleChange("name")}
                 type="text"
                 value={name}
               />
-            </div>
+            </div>*/} 
 
-       {/*  <div className="form-group">
+            <div className="form-group">
               <label className="text-light">Email</label>
               <input
                 className="form-control"
@@ -64,7 +64,7 @@ const USignup = () => {
                 value={email}
               />
             </div>
- */}   
+
             <div className="form-group">
               <label className="text-light">Password</label>
               <input
@@ -92,7 +92,7 @@ const USignup = () => {
         className="alert alert-success"
         style={{ display: success ? "" : "none" }}
       >
-        New Account Has been created successFully.
+        New Account Has been created successFully. Please Login
       </div>
       </div>
       </div>
@@ -109,14 +109,14 @@ const USignup = () => {
     style={{ display: errors ? "" : "none" }}
   >
     {errors}
-      </div>
+  </div>
   </div>
   </div>
    );
   };
 
   return (
-    <Base title="Sign up page" description="A page for Teacher to sign up!">
+    <Base title="Teacher Sign up page" description="A page for Teacher to sign up!">
       {successMessage()}
       {errorMessage()}
       {signUpForm()}
@@ -126,4 +126,4 @@ const USignup = () => {
   );
 };
 
-export default USignup;
+export default TSignup;

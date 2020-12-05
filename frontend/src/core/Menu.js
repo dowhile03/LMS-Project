@@ -27,7 +27,19 @@ const Menu = ({ history }) => {
               className="nav-link"
               to="/user/dashboard"
             >
-              U.Dashboard
+              User Dashboard
+            </Link>
+          </li>
+        )}
+
+        {isAuthenticated() && isAuthenticated().user.role === 2 && (
+          <li className="nav-item">
+            <Link
+              style={currentTab(history, "/teacher/dashboard")}
+              className="nav-link"
+              to="/teacher/dashboard"
+            >
+              Teacher Dashboard
             </Link>
           </li>
         )}
@@ -38,7 +50,7 @@ const Menu = ({ history }) => {
               className="nav-link"
               to="/admin/dashboard"
             >
-              A.Dashboard
+              Parents Dashboard
             </Link>
           </li>
         )}
@@ -116,7 +128,7 @@ const Menu = ({ history }) => {
         {!isAuthenticated() && (
           <Fragment>
            
-            <li className="nav-item ml-3">
+            <li className="nav-item  ml-3">
               <Link
                 style={currentTab(history, "/createlogin")}
                 className="nav-link text-dark bg-light"

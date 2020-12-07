@@ -4,7 +4,7 @@ import { signout, isAuthenticated } from "../auth/helper";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#2ecc72" };
+    return { "background-color": "#FFCE74" };
   } else {
     return { color: "#FFFFFF" }; 
   }
@@ -92,9 +92,9 @@ const Menu = ({ history }) => {
             </li> */}
             <li className="nav-item">
               <Link
-                style={currentTab(history, "Tsignin")}
+                style={currentTab(history, "/Tsignin")}
                 className="nav-link"
-                to="Tsignin"
+                to="/Tsignin"
               >
               Teacher Login
               </Link>
@@ -128,10 +128,10 @@ const Menu = ({ history }) => {
         {!isAuthenticated() && (
           <Fragment>
            
-            <li className="nav-item  ml-3">
+            <li className="nav-item ml-3">
               <Link
                 style={currentTab(history, "/createlogin")}
-                className="nav-link text-dark bg-light"
+                className="nav-link"
                 to="/createlogin"
               >
               Create Login
